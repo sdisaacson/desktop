@@ -1,0 +1,112 @@
+[21:26:05.314] [DEBUG] Extracting storybook data...
+[21:26:05.315] [DEBUG] Getting Storybook info...
+[21:26:05.316] [DEBUG] Loading main config...
+[21:26:05.326] [WARN] Multiple main files found in your configDir (/Users/isaacson/Projects/invester/.storybook).
+Storybook will use the first one found and ignore the others. Please remove the extra files.
+[21:26:05.900] [DEBUG] Getting stories paths...
+[21:26:05.927] [DEBUG] Getting package manager...
+[21:26:06.464] [DEBUG] Getting Storybook version...
+[21:26:06.465] [INFO] 🔎 checking possible migrations..
+[21:26:06.850] [DEBUG] Running eslintPlugin migration checks
+[21:26:06.857] [DEBUG] End of eslintPlugin migration checks
+[21:26:06.857] [DEBUG] Running addon-mdx-gfm-remove migration checks
+[21:26:06.858] [DEBUG] End of addon-mdx-gfm-remove migration checks
+[21:26:06.858] [DEBUG] Running addon-storysource-code-panel migration checks
+[21:26:06.858] [DEBUG] End of addon-storysource-code-panel migration checks
+[21:26:06.858] [DEBUG] Running initial-globals migration checks
+[21:26:06.881] [DEBUG] End of initial-globals migration checks
+[21:26:06.881] [DEBUG] Running addon-a11y-addon-test migration checks
+[21:26:06.882] [DEBUG] End of addon-a11y-addon-test migration checks
+[21:26:06.882] [DEBUG] Running consolidated-imports migration checks
+[21:26:06.883] [DEBUG] End of consolidated-imports migration checks
+[21:26:06.883] [DEBUG] Running addon-experimental-test migration checks
+[21:26:06.883] [DEBUG] Getting installed version for @storybook/experimental-addon-test...
+[21:26:08.519] [DEBUG] End of addon-experimental-test migration checks
+[21:26:08.519] [DEBUG] Running rnstorybook-config migration checks
+[21:26:08.519] [DEBUG] End of rnstorybook-config migration checks
+[21:26:08.519] [DEBUG] Running remove-addon-interactions migration checks
+[21:26:08.519] [DEBUG] End of remove-addon-interactions migration checks
+[21:26:08.519] [DEBUG] Running renderer-to-framework migration checks
+[21:26:08.520] [DEBUG] End of renderer-to-framework migration checks
+[21:26:08.520] [INFO] 🔎 found a 'renderer-to-framework' migration:
+[21:26:08.840] [INFO] automigrate-task-renderer-to-framework-task-start: Automigration detected: renderer-to-framework
+[21:26:08.841] [INFO] We're moving from renderer-based to framework-based configuration and update your imports and dependencies accordingly.
+[21:26:08.841] [INFO] We're moving from renderer-based to framework-based configuration and update your imports and dependencies accordingly.
+[21:26:19.727] [PROMPT] Do you want to run the 'renderer-to-framework' migration on your project? {"choice":true}
+[21:26:19.727] [DEBUG] 
+Migrating @storybook/react to @storybook/react-webpack5
+[21:26:19.740] [DEBUG] Updating package.json files...
+[21:26:19.741] [INFO] ✅ ran renderer-to-framework migration
+[21:26:19.741] [INFO] automigrate-task-renderer-to-framework-task-success: Ran renderer-to-framework migration
+[21:26:19.741] [DEBUG] Running remove-essential-addons migration checks
+[21:26:19.741] [DEBUG] End of remove-essential-addons migration checks
+[21:26:19.741] [DEBUG] Running addon-a11y-parameters migration checks
+[21:26:19.742] [DEBUG] End of addon-a11y-parameters migration checks
+[21:26:19.742] [DEBUG] Running remove-docs-autodocs migration checks
+[21:26:19.746] [DEBUG] End of remove-docs-autodocs migration checks
+[21:26:19.746] [DEBUG] Running wrap-require migration checks
+[21:26:19.749] [DEBUG] End of wrap-require migration checks
+[21:26:19.749] [INFO] 
+[21:26:20.082] [INFO] Successful migrations:
+
+renderer-to-framework
+
+─────────────────────────────────────────────────
+
+If you'd like to run the migrations again, you can do so by running 'npx storybook automigrate'
+
+The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate to the latest version of Storybook.
+
+Please check the changelog and migration guide for manual migrations and more information: https://storybook.js.org/docs/migration-guide?ref=upgrade
+And reach out on Discord if you need help: https://discord.gg/storybook
+[21:26:20.082] [INFO] Migration check ran successfully
+[21:26:20.482] [INFO] Successful migrations:
+
+renderer-to-framework
+
+─────────────────────────────────────────────────
+
+If you'd like to run the migrations again, you can do so by running 'npx storybook automigrate'
+
+The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate to the latest version of Storybook.
+
+Please check the changelog and migration guide for manual migrations and more information: https://storybook.js.org/docs/migration-guide?ref=upgrade
+And reach out on Discord if you need help: https://discord.gg/storybook
+[21:26:20.820] [INFO] 
+[21:26:21.266] [INFO] Installing dependencies...
+[21:26:21.266] [INFO] install-dependencies-task-start: Installing dependencies...
+[21:26:21.269] [INFO] Checking the health of your Storybook..
+[21:26:21.269] [DEBUG] Getting Storybook info...
+[21:26:21.270] [DEBUG] Loading main config...
+[21:26:21.278] [DEBUG] Getting stories paths...
+[21:26:21.278] [DEBUG] Getting package manager...
+[21:26:21.278] [DEBUG] Getting Storybook version...
+[21:26:21.877] [INFO] yarn install v1.22.22
+[21:26:22.454] [INFO] install-dependencies-task: yarn install v1.22.22
+[21:26:22.455] [INFO] [1/4] Resolving packages...
+[21:26:22.965] [INFO] install-dependencies-task: [1/4] Resolving packages...
+[21:26:22.965] [INFO] [2/4] Fetching packages...
+[21:26:23.444] [INFO] install-dependencies-task: [2/4] Fetching packages...
+[21:26:23.447] [WARN] .storybook: 1 issue found
+[21:26:23.448] [INFO] You are currently using Storybook 9.1.7 but you have packages which are incompatible with it:
+
+- @storybook/manager-webpack5@6.5.16 which depends on 6.5.16
+ Repo: https://github.com/storybookjs/storybook/tree/main/lib/core
+
+Please consider updating your packages or contacting the maintainers for compatibility details.
+
+For more on Storybook 9 compatibility, see the linked GitHub issue:
+https://github.com/storybookjs/storybook/issues/30944
+[21:26:23.448] [INFO] Incompatible Packages
+[21:26:23.448] [INFO] You are currently using Storybook 9.1.7 but you have packages which are incompatible with it:
+
+- @storybook/manager-webpack5@6.5.16 which depends on 6.5.16
+ Repo: https://github.com/storybookjs/storybook/tree/main/lib/core
+
+Please consider updating your packages or contacting the maintainers for compatibility details.
+
+For more on Storybook 9 compatibility, see the linked GitHub issue:
+https://github.com/storybookjs/storybook/issues/30944
+[21:26:23.448] [INFO] Storybook doctor is complete!
+[21:26:23.448] [INFO] You can always recheck the health of your project(s) by running:
+npx storybook doctor
