@@ -48,6 +48,12 @@ type RSSWidgetProps = {
     widgetData: Widget;
 };
 
+type PackageTrackerWidgetProps = {
+    theme: "dark" | "light";
+    id: string;
+    widgetData: Widget;
+};
+
 type UseBoardProps = {
     layout: Layout[];
     widgets: Widget[];

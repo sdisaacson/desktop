@@ -21,6 +21,7 @@ import CalendarWidget from "../Widgets/Calendar/CalendarWidget";
 import MeetingScheduleWidget from "../Widgets/MeetingSchedule/MeetingScheduleWidget";
 import EmailWidget from "../Widgets/Email/EmailWidget";
 import FileManagerWidget from "../Widgets/FileManager/FileManagerWidget";
+import PackageTrackerWidget from "../Widgets/PackageTracker/PackageTrackerWidget";
 
 export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     const theme = useSelector((state: GlobalData) => state.theme);
@@ -172,6 +173,16 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     if (widget.type === "BookmarksWidget") {
         return (
             <BookmarksWidget bookmarks={widget.bookmarks || []} id={widget.i} />
+        );
+    }
+
+    if (widget.type === "PackageTrackerWidget") {
+        return (
+            <PackageTrackerWidget
+                theme={theme}
+                id={widget.i}
+                widgetData={widget}
+            />
         );
     }
 

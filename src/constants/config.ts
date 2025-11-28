@@ -39,6 +39,21 @@ export const AVAILABLE_WIDGETS = [
         requirements: [],
     },
     {
+        name: "Meeting Schedule",
+        type_id: "MeetingScheduleWidget",
+        requirements: [],
+    },
+    {
+        name: "Package Tracking",
+        type_id: "PackageTrackerWidget",
+        requirements: [],
+    },
+    {
+        name: "File Manager",
+        type_id: "FileManagerWidget",
+        requirements: [],
+    },
+    {
         name: "Email Reader",
         type_id: "EmailWidget",
         requirements: [],

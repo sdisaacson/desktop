@@ -1,0 +1,144 @@
+.MeetingScheduleWidget .content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.95rem;
+}
+
+.meeting-setup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.meeting-helper {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.4;
+}
+
+.meeting-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meeting-field span {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text);
+}
+
+.meeting-field input {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    padding: 8px;
+    color: inherit;
+}
+
+.meeting-save-button {
+    align-self: flex-start;
+    background: var(--coolBlue);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.meeting-save-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.meeting-error,
+.meeting-error-inline {
+    color: #ff8585;
+    font-size: 0.85rem;
+}
+
+.meeting-loading {
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.meeting-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--text);
+}
+
+.meeting-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.meeting-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid transparent;
+}
+
+.meeting-item.next-meeting {
+    border-color: var(--coolBlue);
+    box-shadow: 0 0 10px rgba(28, 134, 236, 0.2);
+}
+
+.meeting-time {
+    flex: 0 0 160px;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+    color: var(--text);
+}
+
+.meeting-day {
+    font-weight: 600;
+}
+
+.meeting-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meeting-location {
+    color: var(--text);
+}
+
+.meeting-empty {
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.meeting-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+}
+
+.meeting-icon-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

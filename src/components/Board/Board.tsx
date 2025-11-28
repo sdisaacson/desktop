@@ -46,6 +46,17 @@ export type RSSFeedSnapshot = {
     }>;
 };
 
+export type MeetingScheduleSnapshot = {
+    cachedAt: number;
+    events: Array<{
+        id: string;
+        title: string;
+        start: string;
+        end?: string;
+        location?: string;
+    }>;
+};
+
 export type Widget = {
     i: string;
     type: string;
@@ -77,6 +88,27 @@ export type Widget = {
         scroll?: boolean;
     };
     rssSnapshot?: RSSFeedSnapshot;
+    meetingScheduleConfig?: {
+        icsUrl: string;
+        days: number;
+        refreshInterval: number;
+    };
+    meetingScheduleSnapshot?: MeetingScheduleSnapshot;
+    packageTrackerConfig?: {
+        apiKey: string;
+        trackingNumber: string;
+        courier: string;
+    };
+    packageTrackerData?: {
+        status?: string;
+        lastUpdate?: string;
+        events?: Array<{
+            time: string;
+            description: string;
+            location?: string;
+        }>;
+    };
+    fileManagerPath?: string;
 };
 export type WidgetInfo = Widget & Layout;
 
