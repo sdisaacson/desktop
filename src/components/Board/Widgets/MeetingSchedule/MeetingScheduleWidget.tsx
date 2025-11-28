@@ -29,7 +29,7 @@ const DEFAULT_DAYS = 7;
 const DEFAULT_REFRESH_MINUTES = 30;
 
 const CORS_PROXY = "https://corsproxy.io/?";
-const ICS_FETCH_TIMEOUT_MS = 60000;
+const ICS_FETCH_TIMEOUT_MS = 120000;
 
 const unfoldICS = (ics: string) => ics.replace(/\r?\n[ \t]/g, "");
 
@@ -69,6 +69,7 @@ const parseICSDate = (value: string): string | null => {
 const parseICSEvents = (ics: string): MeetingEvent[] => {
     const lines = unfoldICS(ics).split(/\r?\n/);
     const events: MeetingEvent[] = [];
+    const usedIds = new Map<string, number>();
     let draft: Partial<MeetingEvent> = {};
 
     lines.forEach((line) => {
@@ -78,10 +79,16 @@ const parseICSEvents = (ics: string): MeetingEvent[] => {
         }
         if (line.startsWith("END:VEVENT")) {
             if (draft.start && draft.title) {
+                const baseId =
+                    draft.id ??
+                    `${draft.start}-${draft.title}`.replace(/\s+/g, "-");
+                const occurrence = usedIds.get(baseId) ?? 0;
+                usedIds.set(baseId, occurrence + 1);
+                const uniqueId =
+                    occurrence === 0 ? baseId : `${baseId}-${occurrence}`;
+
                 const event: MeetingEvent = {
-                    id:
-                        draft.id ??
-                        `${draft.start}-${draft.title}`.replace(/\s+/g, "-"),
+                    id: uniqueId,
                     title: draft.title,
                     start: draft.start,
                 };
@@ -113,6 +120,21 @@ const parseICSEvents = (ics: string): MeetingEvent[] => {
         );
 };
 
+const sanitizeForFirestore = <T,>(value: T): T => {
+    if (Array.isArray(value)) {
+        return value.map((item) => sanitizeForFirestore(item)) as T;
+    }
+    if (value && typeof value === "object") {
+        const result: Record<string, any> = {};
+        Object.entries(value as Record<string, any>).forEach(([key, val]) => {
+            if (val === undefined) return;
+            result[key] = sanitizeForFirestore(val);
+        });
+        return result as T;
+    }
+    return value;
+};
+
 const fetchWithTimeout = async (
     target: string,
     timeoutMs: number = ICS_FETCH_TIMEOUT_MS
@@ -128,24 +150,12 @@ const fetchWithTimeout = async (
 };
 
 const fetchIcsText = async (url: string) => {
-    const attempt = async (target: string) => {
-        const response = await fetchWithTimeout(target);
-        if (!response.ok) {
-            throw new Error("Unable to fetch the provided calendar.");
-        }
-        return response.text();
-    };
-
-    try {
-        return await attempt(url);
-    } catch (error) {
-        // Commonly TypeError for CORS issues; retry using a proxy.
-        if (error instanceof TypeError || (error as any)?.name === "AbortError") {
-            const proxied = `${CORS_PROXY}${encodeURIComponent(url)}`;
-            return attempt(proxied);
-        }
-        throw error;
+    const proxied = `${CORS_PROXY}${encodeURIComponent(url)}`;
+    const response = await fetchWithTimeout(proxied);
+    if (!response.ok) {
+        throw new Error("Unable to fetch the provided calendar.");
     }
+    return response.text();
 };
 
 export default function MeetingScheduleWidget({
@@ -167,6 +177,16 @@ export default function MeetingScheduleWidget({
         if (!currentUser) return null;
         return `users/${currentUser.uid}/meetingSchedules/${id}.ics`;
     }, [currentUser, id]);
+
+    const attachStoragePath = useCallback(
+        (partial: Partial<Widget>) => {
+            const path = storagePath ?? widgetData.meetingScheduleStoragePath;
+            return path
+                ? { ...partial, meetingScheduleStoragePath: path }
+                : partial;
+        },
+        [storagePath, widgetData.meetingScheduleStoragePath]
+    );
 
     const [urlInput, setUrlInput] = useState(
         widgetData.meetingScheduleConfig?.icsUrl ?? ""
@@ -206,8 +226,9 @@ export default function MeetingScheduleWidget({
                 ? targetWidgets.map((w) => (w.i === id ? updatedWidget : w))
                 : [...targetWidgets, updatedWidget];
 
-            await save({ layout: targetLayouts, widgets: newWidgets });
-            await saveToFirestore({ widgets: newWidgets });
+            const sanitizedWidgets = sanitizeForFirestore(newWidgets);
+            await save({ layout: targetLayouts, widgets: sanitizedWidgets });
+            await saveToFirestore({ widgets: sanitizedWidgets });
         },
         [
             activeDashboard,
@@ -292,10 +313,12 @@ export default function MeetingScheduleWidget({
         try {
             setLoading(true);
             const snapshot = await buildSnapshot(config);
-            await persistWidget({
-                meetingScheduleConfig: config,
-                meetingScheduleSnapshot: snapshot,
-            });
+            await persistWidget(
+                attachStoragePath({
+                    meetingScheduleConfig: config,
+                    meetingScheduleSnapshot: snapshot,
+                })
+            );
             setError(null);
             setIsConfiguring(false);
         } catch (err) {
@@ -307,7 +330,7 @@ export default function MeetingScheduleWidget({
         } finally {
             setLoading(false);
         }
-    }, [buildSnapshot, daysInput, persistWidget, refreshInput, urlInput]);
+    }, [attachStoragePath, buildSnapshot, daysInput, persistWidget, refreshInput, urlInput]);
 
     const handleRefresh = useCallback(async () => {
         if (!widgetData.meetingScheduleConfig) {
@@ -317,12 +340,12 @@ export default function MeetingScheduleWidget({
 
         try {
             setLoading(true);
-            const snapshot = await buildSnapshot(
-                widgetData.meetingScheduleConfig
+            const snapshot = await buildSnapshot(widgetData.meetingScheduleConfig);
+            await persistWidget(
+                attachStoragePath({
+                    meetingScheduleSnapshot: snapshot,
+                })
             );
-            await persistWidget({
-                meetingScheduleSnapshot: snapshot,
-            });
             setError(null);
         } catch (err) {
             setError(
@@ -333,7 +356,7 @@ export default function MeetingScheduleWidget({
         } finally {
             setLoading(false);
         }
-    }, [buildSnapshot, persistWidget, widgetData.meetingScheduleConfig]);
+    }, [attachStoragePath, buildSnapshot, persistWidget, widgetData.meetingScheduleConfig]);
 
     useEffect(() => {
         if (!widgetData.meetingScheduleConfig) return;
@@ -346,7 +369,7 @@ export default function MeetingScheduleWidget({
 
     useEffect(() => {
         const config = widgetData.meetingScheduleConfig;
-        if (!config) return;
+        if (!config || !storagePath) return;
 
         let cancelled = false;
         const intervalMs = Math.max(config.refreshInterval, 1) * 60 * 1000;
@@ -356,9 +379,11 @@ export default function MeetingScheduleWidget({
             try {
                 const snapshot = await buildSnapshot(config);
                 if (!cancelled) {
-                    await persistWidget({
-                        meetingScheduleSnapshot: snapshot,
-                    });
+                    await persistWidget(
+                        attachStoragePath({
+                            meetingScheduleSnapshot: snapshot,
+                        })
+                    );
                     setError(null);
                 }
             } catch (err) {
@@ -382,8 +407,10 @@ export default function MeetingScheduleWidget({
             window.clearInterval(timer);
         };
     }, [
+        attachStoragePath,
         buildSnapshot,
         persistWidget,
+        storagePath,
         widgetData.meetingScheduleConfig,
         widgetData.meetingScheduleSnapshot,
     ]);

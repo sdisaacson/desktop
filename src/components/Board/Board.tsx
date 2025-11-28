@@ -94,6 +94,7 @@ export type Widget = {
         refreshInterval: number;
     };
     meetingScheduleSnapshot?: MeetingScheduleSnapshot;
+    meetingScheduleStoragePath?: string;
     packageTrackerConfig?: {
         apiKey: string;
         trackingNumber: string;
