@@ -1,0 +1,58 @@
+.email-reader {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.reader-header {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+#App.dark .reader-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.reader-subject {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.reader-meta {
+    font-size: 12px;
+    color: #666;
+}
+#App.dark .reader-meta {
+    color: #aaa;
+}
+
+.reader-body {
+    flex: 1;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.reader-attachments {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+#App.dark .reader-attachments {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.attachment-item {
+    display: inline-block;
+    padding: 4px 8px;
+    background: rgba(0,0,0,0.05);
+    border-radius: 4px;
+    margin-right: 5px;
+    font-size: 12px;
+    cursor: pointer;
+}
+#App.dark .attachment-item {
+    background: rgba(255,255,255,0.1);
+}

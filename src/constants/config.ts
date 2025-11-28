@@ -59,4 +59,9 @@ export const AVAILABLE_WIDGETS = [
         type_id: "YouTubeWidget",
         requirements: [],
     },
+    {
+        name: "Email Reader",
+        type_id: "EmailWidget",
+        requirements: [],
+    },
 ];

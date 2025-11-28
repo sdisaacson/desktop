@@ -1,0 +1,252 @@
+/* Root container as Flex Column */
+.EmailWidget {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    color: var(--darkness);
+    font-family: var(--font-read);
+    overflow: hidden;
+    position: relative;
+}
+
+#App.dark .EmailWidget {
+    color: white;
+}
+
+/* Header - Drag Handle */
+.EmailWidget .header {
+    flex-shrink: 0;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    background-color: var(--header-bg); /* Global var usage implies inheritance or availability */
+    border-bottom: 1px solid #eee;
+    cursor: move; /* Explicit move cursor */
+}
+
+#App.dark .EmailWidget .header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.EmailWidget .widgetTitle {
+    font-weight: 900;
+    font-size: 10px;
+    pointer-events: none; /* Let clicks pass to header for dragging */
+}
+
+.EmailWidget .widgetButtons {
+    pointer-events: auto; /* Re-enable for buttons */
+}
+
+/* Content container */
+.EmailWidget .content {
+    flex-grow: 1;
+    height: 0; /* TRICK: Force flex child to respect container height for overflow */
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Config Form */
+.email-config {
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+}
+
+.config-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+#App.dark .config-section {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.config-section h4 {
+    margin: 0 0 5px 0;
+    font-size: 13px;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#App.dark .config-section h4 {
+    color: #aaa;
+}
+
+.email-config .row {
+    display: flex;
+    gap: 10px;
+}
+
+.email-config input, .email-config select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    font-size: 12px;
+}
+
+#App.dark .email-config input, #App.dark .email-config select {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #444;
+    color: white;
+}
+
+.config-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.save-btn {
+    flex: 1;
+    padding: 10px;
+    background: var(--coolYellow);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--darkness);
+}
+
+.test-btn {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid var(--coolYellow);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--darkness);
+}
+#App.dark .test-btn {
+    color: white;
+}
+
+/* Inbox List */
+.email-list {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+.email-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+#App.dark .email-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.email-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+#App.dark .email-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.email-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.email-subject {
+    font-size: 13px;
+}
+
+.email-date {
+    font-size: 11px;
+    color: #666;
+}
+#App.dark .email-date {
+    color: #aaa;
+}
+
+/* Pagination Bar */
+.email-pagination {
+    padding: 5px 10px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+#App.dark .email-pagination {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Toolbar */
+.email-toolbar {
+    padding: 5px 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+#App.dark .email-toolbar {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.email-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: inherit;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+.email-btn:hover {
+    background: rgba(0,0,0,0.1);
+}
+#App.dark .email-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Compose */
+.email-compose {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 10px;
+    gap: 10px;
+}
+.email-compose input, .email-compose textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    font-family: inherit;
+}
+#App.dark .email-compose input, #App.dark .email-compose textarea {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #444;
+    color: white;
+}
+.email-compose textarea {
+    flex: 1;
+    resize: none;
+}

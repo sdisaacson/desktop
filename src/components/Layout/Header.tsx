@@ -81,8 +81,6 @@ export default function Header() {
         <div id="Header" data-testid="Header">
             <div className="Col">
                 <span id="AppLogo">{APP_NAME}</span>
-                <span className="versionInfo">{APP_TITLE}</span>
-                {currentUser && <span style={{fontSize: '12px', marginLeft: '10px', color: '#888'}}>Hi, {currentUser.displayName || currentUser.email}</span>}
             </div>
 
             <div className="Col"></div>

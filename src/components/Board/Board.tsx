@@ -20,6 +20,7 @@ export type Widget = {
     channelIds?: string[];
     videoCount?: number;
     orientation?: 'vertical' | 'horizontal' | 'grid';
+    emailConfig?: { user: string; password: string; host: string; port?: number; tls?: boolean; };
 };
 export type WidgetInfo = Widget & Layout;
 
