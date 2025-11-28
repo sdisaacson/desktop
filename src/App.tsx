@@ -8,7 +8,7 @@ import LoginScreen from "./components/Auth/LoginScreen";
 
 function AppContent() {
     const theme = useSelector((state: GlobalData) => state.theme);
-    const { currentUser } = useAuth();
+    const { currentUser, loading } = useAuth();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,6 +18,16 @@ function AppContent() {
         }
         // eslint-disable-next-line
     }, []);
+
+    if (loading) {
+        return (
+            <div className={`auth-container ${theme}`} data-theme={theme}>
+                <div className="auth-card">
+                    <div className="auth-title">Loading dashboard…</div>
+                </div>
+            </div>
+        );
+    }
 
     if (!currentUser) {
         return <LoginScreen theme={theme} />;

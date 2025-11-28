@@ -8,7 +8,7 @@ import {
     RefreshCcw,
     LogOut,
 } from "react-feather";
-import { APP_NAME, APP_TITLE } from "../../constants/config";
+import { APP_NAME } from "../../constants/config";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import {
@@ -28,7 +28,7 @@ export default function Header() {
     const [fullScreen, setFullScreen] = useState(false);
     const dispatch = useDispatch();
     const modalOpen = useSelector((state: RootState) => state.modalOpen);
-    const { logout, currentUser } = useAuth();
+    const { logout } = useAuth();
 
     function toggleFullscreen() {
         const elem: HTMLElement = document.documentElement;

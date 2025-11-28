@@ -12,10 +12,10 @@ import { useBoard } from "../../hooks/useBoard";
 import { useDashboard } from "../../hooks/useDashboard";
 
 export default function AddWidget() {
-    const global: GlobalData = useSelector((state: GlobalData) => state);
+    const modalOpen = useSelector((state: GlobalData) => state.modalOpen);
     const dispatch = useDispatch();
 
-    if (!global.modalOpen) return null;
+    if (!modalOpen) return null;
     return (
         <div className="addWidgetModalBackDrop">
             <div className="addWidgetModal">
@@ -63,7 +63,13 @@ const WidgetBox = ({
     const [symbol, setSymbol] = useState("BTCUSDT");
     const [channel, setChannel] = useState("CNBC");
     const { save } = useBoard();
-    const global = useSelector((state: GlobalData) => state);
+    const { activeDashboard, layouts, widgets } = useSelector(
+        (state: GlobalData) => ({
+            activeDashboard: state.activeDashboard,
+            layouts: state.layouts,
+            widgets: state.widgets,
+        })
+    );
     const dispatch = useDispatch();
     const { getLocalDashboards } = useDashboard();
 
@@ -90,15 +96,15 @@ const WidgetBox = ({
             ...(data.type_id === "TVBox" ? { channel: channel } : {}),
         };
 
-        if (global.activeDashboard === "home") {
+        if (activeDashboard === "home") {
             save({
-                layout: [...global.layouts, newLayoutItemItem],
-                widgets: [...global.widgets, newWidgetItem],
+                layout: [...layouts, newLayoutItemItem],
+                widgets: [...widgets, newWidgetItem],
             });
         } else {
             const localDashboards = await getLocalDashboards();
             const thisDashboard = localDashboards.filter(
-                (dashB) => dashB.id === global.activeDashboard
+                (dashB) => dashB.id === activeDashboard
             )[0];
             save({
                 layout: [...thisDashboard.layouts, ...[newLayoutItemItem]],

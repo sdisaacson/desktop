@@ -9,6 +9,43 @@ import { useBoard } from "../../hooks/useBoard";
 import { useFirestore } from "../../hooks/useFirestore";
 import { GlobalData } from "../../store/global";
 
+export type WeatherSnapshot = {
+    cachedAt: number;
+    location: { city: string; country?: string };
+    current: {
+        temp: number;
+        feelsLike: number;
+        description: string;
+        icon?: string;
+        humidity?: number;
+    };
+    forecast: Array<{
+        date: string;
+        temp: number;
+        description: string;
+        icon?: string;
+    }>;
+};
+
+export type RSSArticle = {
+    id: string;
+    title: string;
+    link: string;
+    description: string;
+    thumbnail?: string;
+    pubDate?: string;
+};
+
+export type RSSFeedSnapshot = {
+    cachedAt: number;
+    feeds: Array<{
+        url: string;
+        title?: string;
+        articleCount: number;
+        items: RSSArticle[];
+    }>;
+};
+
 export type Widget = {
     i: string;
     type: string;
@@ -19,8 +56,27 @@ export type Widget = {
     videoId?: string;
     channelIds?: string[];
     videoCount?: number;
-    orientation?: 'vertical' | 'horizontal' | 'grid';
-    emailConfig?: { user: string; password: string; host: string; port?: number; tls?: boolean; };
+    orientation?: "vertical" | "horizontal" | "grid";
+    emailConfig?: {
+        user: string;
+        password: string;
+        host: string;
+        port?: number;
+        tls?: boolean;
+    };
+    weatherConfig?: {
+        apiKey: string;
+        city: string;
+        units: "metric" | "imperial";
+    };
+    weatherSnapshot?: WeatherSnapshot;
+    rssConfig?: {
+        feedUrls: string[];
+        articleCount: number;
+        refreshInterval: number;
+        scroll?: boolean;
+    };
+    rssSnapshot?: RSSFeedSnapshot;
 };
 export type WidgetInfo = Widget & Layout;
 

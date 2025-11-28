@@ -175,3 +175,386 @@
     border-radius: 6px;
     color: var(--darkness);
 }
+
+.WeatherWidget .content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 11px;
+}
+
+.WeatherWidget .weather-icon-button {
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 2px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+.WeatherWidget .weather-icon-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.WeatherWidget .weather-setup label span {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.WeatherWidget .weather-setup input,
+.WeatherWidget .weather-setup select {
+    width: 100%;
+    padding: 6px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: inherit;
+}
+#App.light .WeatherWidget .weather-setup input,
+#App.light .WeatherWidget .weather-setup select {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.WeatherWidget .weather-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.WeatherWidget .weather-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.WeatherWidget .weather-button {
+    border: none;
+    border-radius: 3px;
+    padding: 6px 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.WeatherWidget .weather-button.primary {
+    background: var(--coolBlue);
+    color: #fff;
+}
+.WeatherWidget .weather-button.secondary {
+    background: transparent;
+    border: 1px solid var(--coolBlue);
+}
+
+.WeatherWidget .weather-error {
+    color: #ff6b6b;
+}
+.WeatherWidget .weather-loading {
+    font-style: italic;
+}
+
+.WeatherWidget .current-weather {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.WeatherWidget .current-weather .temp {
+    font-size: 32px;
+    font-weight: 700;
+}
+.WeatherWidget .current-weather .temp span {
+    font-size: 16px;
+    margin-left: 4px;
+}
+.WeatherWidget .current-weather .current-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 11px;
+}
+.WeatherWidget .current-weather .weather-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.WeatherWidget .forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 8px;
+}
+.WeatherWidget .forecast-day {
+    text-align: center;
+    padding: 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+}
+#App.light .WeatherWidget .forecast-day {
+    background: rgba(0, 0, 0, 0.04);
+}
+.WeatherWidget .forecast-day .day {
+    font-weight: 600;
+}
+.WeatherWidget .forecast-day img {
+    width: 32px;
+    height: 32px;
+}
+.WeatherWidget .forecast-day .temp {
+    display: block;
+    font-weight: 600;
+}
+
+.WeatherWidget .weather-empty {
+    text-align: center;
+    padding: 10px;
+}
+
+.CalendarWidget .content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.calendar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+}
+.calendar-weekdays,
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+.calendar-weekday {
+    text-align: center;
+    font-weight: 600;
+    font-size: 10px;
+    opacity: 0.7;
+}
+.calendar-day {
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+#App.light .calendar-day {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+.calendar-day.fade {
+    opacity: 0.4;
+}
+.calendar-day.today {
+    font-weight: 700;
+    border-color: var(--coolBlue);
+    background: rgba(28, 134, 236, 0.2);
+    color: inherit;
+}
+.RSSWidget .content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 11px;
+    overflow: auto;
+}
+.RSSWidget .rss-icon-button {
+    border: none;
+    background: none;
+    color: inherit;
+    padding: 2px;
+    margin-right: 4px;
+    cursor: pointer;
+}
+.RSSWidget .rss-icon-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+.RSSWidget .rss-loading {
+    font-style: italic;
+}
+.RSSWidget .rss-error {
+    color: #ff6b6b;
+}
+.RSSWidget .rss-helper {
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+.RSSWidget .rss-setup input {
+    width: 100%;
+    padding: 6px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: inherit;
+}
+#App.light .RSSWidget .rss-setup input {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.03);
+}
+.RSSWidget .rss-feed-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.RSSWidget .rss-feed-input-row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+.RSSWidget .rss-icon-button.danger {
+    color: #ff6b6b;
+}
+.RSSWidget .rss-add-feed {
+    border: 1px dashed currentColor;
+    background: none;
+    color: inherit;
+    padding: 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+}
+.RSSWidget .rss-feed-count {
+    font-size: 10px;
+    opacity: 0.8;
+}
+.RSSWidget .rss-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.RSSWidget .rss-field span {
+    font-weight: 600;
+}
+.RSSWidget .rss-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    margin-top: -4px;
+}
+.RSSWidget .rss-checkbox input {
+    width: auto;
+}
+.RSSWidget .rss-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.RSSWidget .rss-button {
+    border: none;
+    border-radius: 3px;
+    padding: 6px 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.RSSWidget .rss-button.primary {
+    background: var(--coolBlue);
+    color: #fff;
+}
+.RSSWidget .rss-button.secondary {
+    background: transparent;
+    border: 1px solid var(--coolBlue);
+    color: var(--coolBlue);
+}
+.RSSWidget .rss-feeds {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.RSSWidget .rss-feed-block {
+    border-radius: 4px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.03);
+}
+#App.light .RSSWidget .rss-feed-block {
+    background: rgba(0, 0, 0, 0.03);
+}
+.RSSWidget .rss-feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+.RSSWidget .rss-feed-header small {
+    display: block;
+    opacity: 0.6;
+}
+.RSSWidget .rss-article-count {
+    font-size: 10px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+.RSSWidget .rss-articles {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 240px;
+    overflow-y: auto;
+}
+.RSSWidget .rss-articles.scrolling {
+    overflow: hidden;
+    animation: rss-scroll var(--rss-scroll-duration, 20s) linear infinite;
+}
+.RSSWidget .rss-articles.scrolling:hover {
+    animation-play-state: paused;
+}
+.RSSWidget .rss-article {
+    display: flex;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 4px;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.1);
+}
+#App.light .RSSWidget .rss-article {
+    background: rgba(0, 0, 0, 0.05);
+}
+.RSSWidget .rss-article:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+#App.light .RSSWidget .rss-article:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+.RSSWidget .rss-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+.RSSWidget .rss-thumb.placeholder {
+    background: rgba(255, 255, 255, 0.1);
+}
+.RSSWidget .rss-article-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 11px;
+}
+.RSSWidget .rss-article-body strong {
+    font-size: 12px;
+}
+.RSSWidget .rss-empty {
+    text-align: center;
+    padding: 10px;
+}
+.RSSWidget .rss-updated {
+    font-size: 10px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+@keyframes rss-scroll {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}

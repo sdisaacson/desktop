@@ -33,7 +33,14 @@ interface EmailConfig {
 export default function EmailWidget({ id, theme, widgetData }: EmailWidgetProps) {
     const { save } = useBoard();
     const { saveToFirestore } = useFirestore();
-    const { widgets, layouts, dashboards, activeDashboard } = useSelector((state: GlobalData) => state);
+    const { widgets, layouts, dashboards, activeDashboard } = useSelector(
+        (state: GlobalData) => ({
+            widgets: state.widgets,
+            layouts: state.layouts,
+            dashboards: state.dashboards,
+            activeDashboard: state.activeDashboard,
+        })
+    );
 
     const [view, setView] = useState<'inbox' | 'read' | 'compose' | 'config'>('inbox');
     
@@ -294,7 +301,13 @@ export default function EmailWidget({ id, theme, widgetData }: EmailWidgetProps)
                         <input placeholder="To" value={composeTo} onChange={e => setComposeTo(e.target.value)} />
                         <input placeholder="Subject" value={composeSubject} onChange={e => setComposeSubject(e.target.value)} />
                         <textarea placeholder="Message..." value={composeBody} onChange={e => setComposeBody(e.target.value)} />
-                        <button className="email-btn" style={{background: 'var(--coolYellow)', justifyContent: 'center'}} onClick={handleSendEmail}>Send</button>
+                        <button
+                            className="email-btn send-btn"
+                            onClick={handleSendEmail}
+                            disabled={loading}
+                        >
+                            Send
+                        </button>
                     </div>
                 )}
             </div>

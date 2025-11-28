@@ -54,7 +54,7 @@ export default function LoginScreen({ theme }: LoginScreenProps) {
                 if (!firstNameRef.current?.value || !lastNameRef.current?.value) {
                     throw new Error("First and Last Name are required");
                 }
-                const _cred = await signup(emailRef.current.value, passwordRef.current.value);
+                await signup(emailRef.current.value, passwordRef.current.value);
                 await updateUserName(firstNameRef.current.value, lastNameRef.current.value);
                 await verifyEmail();
                 setMessage("Account created! Verification email sent.");

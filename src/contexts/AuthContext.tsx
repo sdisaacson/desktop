@@ -16,6 +16,7 @@ import {
 
 interface AuthContextType {
     currentUser: User | null;
+    loading: boolean;
     signup: (email: string, password: string) => Promise<UserCredential>;
     login: (email: string, password: string) => Promise<UserCredential>;
     logout: () => Promise<void>;
@@ -91,6 +92,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     const value = {
         currentUser,
+        loading,
         signup,
         login,
         logout,
@@ -102,7 +104,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 }

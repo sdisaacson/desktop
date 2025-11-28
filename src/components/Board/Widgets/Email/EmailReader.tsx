@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DOMPurify from "dompurify";
-import { ArrowLeft, Download, CornerUpLeft, CornerUpRight, Trash2 } from "react-feather";
+import { ArrowLeft, Download, CornerUpLeft, CornerUpRight } from "react-feather";
 import "./EmailReader.css";
 import axios from "axios";
 

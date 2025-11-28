@@ -49,21 +49,24 @@ const BookmarksWidget = memo(function ({
                         {widgetBookmarks.map((bm: Bookmark, index: number) => (
                             <li key={index}>
                                 {!editMode ? (
-                                    <a href={bm.link} target="_blank">
+                                    <a
+                                        href={bm.link}
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                    >
                                         <span>{bm.title}</span>
                                         <span>
                                             <ChevronRight size={14} />
                                         </span>
                                     </a>
                                 ) : (
-                                    <a
-                                        href="#"
-                                        onClick={(e) => {
-                                            e.preventDefault();
+                                    <button
+                                        type="button"
+                                        className="bookmark-delete"
+                                        onClick={() => {
                                             if (
                                                 window.confirm("Are you sure?")
                                             ) {
-                                                // TODO: refactor here..
                                                 const newList: Bookmark[] =
                                                     widgetBookmarks.filter(
                                                         (wbm) =>
@@ -96,7 +99,7 @@ const BookmarksWidget = memo(function ({
                                         }}
                                     >
                                         {bm.title} - Delete
-                                    </a>
+                                    </button>
                                 )}
                             </li>
                         ))}

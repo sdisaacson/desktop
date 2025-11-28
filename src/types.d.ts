@@ -36,6 +36,18 @@ type MiniChartProps = {
     id: string;
 };
 
+type WeatherWidgetProps = {
+    theme: "dark" | "light";
+    id: string;
+    widgetData: Widget;
+};
+
+type RSSWidgetProps = {
+    theme: "dark" | "light";
+    id: string;
+    widgetData: Widget;
+};
+
 type UseBoardProps = {
     layout: Layout[];
     widgets: Widget[];

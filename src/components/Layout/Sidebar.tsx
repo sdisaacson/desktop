@@ -29,13 +29,13 @@ export default function Sidebar() {
             const activeDashboard = await getLocalActiveDashboard();
             dispatch(setActiveDashboard(activeDashboard));
         })();
-    }, []);
+    }, [dispatch, getLocalActiveDashboard, getLocalDashboards]);
 
     useEffect(() => {
         setActiveOne(activeDashboard);
         dispatch(setActiveDashboard(activeDashboard));
         createLayout();
-    }, [activeDashboard]);
+    }, [activeDashboard, createLayout, dispatch]);
 
     function handleDeleteDashboard(dashboardId: string) {
         if (
@@ -44,7 +44,7 @@ export default function Sidebar() {
             )
         ) {
             const filteredDashboards = dashboards.filter(
-                (dashB) => dashB.id != dashboardId
+                (dashB) => dashB.id !== dashboardId
             );
 
             const save = saveDashboards(filteredDashboards);

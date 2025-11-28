@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { memo } from "react";
 import DeleteWidget from "../DeleteWidget";
 const CoinSignalsWidget = memo(function ({ id }: { id: string }) {
     return (
@@ -14,6 +14,7 @@ const CoinSignalsWidget = memo(function ({ id }: { id: string }) {
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
+                    title="Coin Signals Predictions"
                 ></iframe>
             </div>
         </div>

@@ -113,26 +113,26 @@
 .save-btn {
     flex: 1;
     padding: 10px;
-    background: var(--coolYellow);
+    background: var(--coolBlue);
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    color: var(--darkness);
+    color: #fff;
 }
 
 .test-btn {
     flex: 1;
     padding: 10px;
     background: transparent;
-    border: 1px solid var(--coolYellow);
+    border: 1px solid var(--coolBlue);
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
-    color: var(--darkness);
+    color: var(--coolBlue);
 }
 #App.dark .test-btn {
-    color: white;
+    color: var(--coolBlue);
 }
 
 /* Inbox List */
@@ -224,6 +224,15 @@
 }
 #App.dark .email-btn:hover {
     background: rgba(255,255,255,0.1);
+}
+
+.email-btn.send-btn {
+    background: var(--coolBlue);
+    color: #fff;
+    justify-content: center;
+}
+.email-btn.send-btn:hover {
+    background: rgba(28, 134, 236, 0.85);
 }
 
 /* Compose */

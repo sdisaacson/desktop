@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     GlobalData,
@@ -18,21 +19,9 @@ export const useBoard = (): UseBoardMethods => {
     const activeDashboard = useSelector((state: GlobalData) => state.activeDashboard);
     const dashboards = useSelector((state: GlobalData) => state.dashboards);
 
-    const getBoard = () => {
-        const layout_changed = localStorage.getItem("layout_changed");
-        if (layout_changed) {
-            // layout changed before
-            createLayout();
-        } else {
-            // this is the first init..
-            init();
-            dispatch(toggleLayoutChanged(true));
-        }
-    };
-
     /// combines layouts and widgets by "i" and returns
     /// layout array
-    const generateLayoutArray = (
+    const generateLayoutArray = useCallback((
         _l: Layout[],
         _w: Widget[]
     ): Promise<WidgetInfo[]> => {
@@ -45,10 +34,10 @@ export const useBoard = (): UseBoardMethods => {
                 }) as WidgetInfo[]
             );
         });
-    };
+    }, []);
 
     /// saves widgets, layouts to both global store and local storage
-    const save = async ({ layout, widgets }: UseBoardProps) => {
+    const save = useCallback(async ({ layout, widgets }: UseBoardProps) => {
         if (activeDashboard === "home") {
             const widgetList: Awaited<Promise<WidgetInfo[]>> =
                 await generateLayoutArray(layout, widgets);
@@ -69,11 +58,11 @@ export const useBoard = (): UseBoardMethods => {
                 await generateLayoutArray(layout, widgets);
             dispatch(setBoard(widgetList));
         }
-    };
+    }, [activeDashboard, dispatch, generateLayoutArray, getLocalDashboards]);
 
     /// create layout according to the selected dashboard id
     /// and sets the board
-    const createLayout = async () => {
+    const createLayout = useCallback(async () => {
         if (activeDashboard === "home") {
             let layout: Layout[] = await JSON.parse(
                 localStorage.getItem("layouts") as string
@@ -100,9 +89,9 @@ export const useBoard = (): UseBoardMethods => {
                 save({ layout, widgets });
             }
         }
-    };
+    }, [activeDashboard, dashboards, dispatch, generateLayoutArray, save]);
 
-    const deleteWidget = async (widgetId: string) => {
+    const deleteWidget = useCallback(async (widgetId: string) => {
         if (activeDashboard === "home") {
             let layouts: Layout[] = await JSON.parse(
                 localStorage.getItem("layouts") as string
@@ -127,14 +116,24 @@ export const useBoard = (): UseBoardMethods => {
             );
             save({ layout: newLayouts, widgets: newWidgets });
         }
-    };
+    }, [activeDashboard, dashboards, save]);
 
-    const init = async () => {
+    const init = useCallback(async () => {
         const layout: Layout[] = INITIAL_LAYOUT;
         const widgets: Widget[] = INITIAL_WIDGETS;
 
         save({ layout, widgets });
-    };
+    }, [save]);
+
+    const getBoard = useCallback(() => {
+        const layout_changed = localStorage.getItem("layout_changed");
+        if (layout_changed) {
+            createLayout();
+        } else {
+            init();
+            dispatch(toggleLayoutChanged(true));
+        }
+    }, [createLayout, dispatch, init]);
 
     return {
         save,

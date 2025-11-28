@@ -1,14 +1,11 @@
 import { useState, useCallback } from "react";
 import { db, auth } from "../firebase";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { GlobalData, setBoard, setWidgets, setLayouts, setDashboards } from "../store/global";
-import { onAuthStateChanged } from "firebase/auth";
-import { INITIAL_LAYOUT, INITIAL_WIDGETS } from "../constants/initials";
 
 export const useFirestore = () => {
     const dispatch = useDispatch();
-    // Removed unused global selector
     const [loading, setLoading] = useState(false);
 
     // Helper to get the current user ID
