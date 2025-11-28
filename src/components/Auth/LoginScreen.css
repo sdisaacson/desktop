@@ -1,0 +1,192 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--bg-color); /* Use theme variable */
+    color: var(--text); /* Use theme variable if available, else override below */
+    font-family: sans-serif;
+}
+
+/* Dark Mode Defaults (matched previous hardcoded styles) */
+.auth-container.dark {
+    color: white;
+}
+
+.auth-container.light {
+    color: var(--darkness);
+}
+
+.auth-card {
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.auth-container.dark .auth-card {
+    background-color: var(--coolGray);
+}
+
+.auth-container.light .auth-card {
+    background-color: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Lighter shadow */
+}
+
+.auth-title {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.auth-container.dark .auth-title {
+    color: var(--coolYellow);
+}
+
+.auth-container.light .auth-title {
+    color: var(--darkness);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-input {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid;
+    font-size: 14px;
+    outline: none;
+}
+
+.auth-container.dark .auth-input {
+    border-color: #444;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.auth-container.light .auth-input {
+    border-color: #ccc;
+    background-color: #f9f9f9;
+    color: var(--darkness);
+}
+
+.auth-input:focus {
+    border-color: var(--coolYellow); /* Consistent accent? Or change for light? */
+}
+.auth-container.light .auth-input:focus {
+    border-color: #007acc; /* Blue for light mode maybe? Or stick to yellow? */
+    /* Let's stick to yellow for brand, or dark border */
+    border-color: var(--darkness);
+}
+
+.auth-btn {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.auth-container.dark .auth-btn {
+    background-color: var(--coolYellow);
+    color: var(--darkness);
+}
+
+.auth-container.light .auth-btn {
+    background-color: var(--darkness);
+    color: white;
+}
+
+.auth-btn:hover {
+    filter: brightness(1.1);
+}
+
+.auth-google-btn {
+    margin-top: 8px;
+    border: 1px solid #ddd;
+}
+
+.auth-container.dark .auth-google-btn {
+    background-color: white;
+    color: #333;
+}
+
+.auth-container.light .auth-google-btn {
+    background-color: white;
+    color: #333;
+    border-color: #ccc;
+}
+
+.auth-link {
+    margin-top: 12px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.auth-container.dark .auth-link {
+    color: #ccc;
+}
+
+.auth-container.light .auth-link {
+    color: #666;
+}
+
+.auth-link span {
+    text-decoration: underline;
+}
+
+.auth-container.dark .auth-link span {
+    color: var(--coolYellow);
+}
+
+.auth-container.light .auth-link span {
+    color: #007acc;
+}
+
+.auth-error {
+    border: 1px solid;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.auth-container.dark .auth-error {
+    background-color: rgba(255, 107, 107, 0.2);
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+}
+
+.auth-container.light .auth-error {
+    background-color: #ffe6e6;
+    border-color: #ffcccc;
+    color: #cc0000;
+}
+
+.auth-success {
+    border: 1px solid;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.auth-container.dark .auth-success {
+    background-color: rgba(75, 181, 67, 0.2);
+    border-color: #4bb543;
+    color: #4bb543;
+}
+
+.auth-container.light .auth-success {
+    background-color: #e6fffa;
+    border-color: #b2f5ea;
+    color: #006644;
+}

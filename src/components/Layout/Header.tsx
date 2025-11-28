@@ -6,6 +6,7 @@ import {
     Minimize,
     Trash2,
     RefreshCcw,
+    LogOut,
 } from "react-feather";
 import { APP_NAME, APP_TITLE } from "../../constants/config";
 import { useSelector, useDispatch } from "react-redux";
@@ -21,11 +22,13 @@ import {
 import { Sun, Moon } from "react-feather";
 import Clock from "./Clock";
 import { INITIAL_LAYOUT, INITIAL_WIDGETS } from "../../constants/initials";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function Header() {
     const [fullScreen, setFullScreen] = useState(false);
     const dispatch = useDispatch();
     const global = useSelector((state: RootState) => state);
+    const { logout, currentUser } = useAuth();
 
     function toggleFullscreen() {
         const elem: HTMLElement = document.documentElement;
@@ -66,11 +69,20 @@ export default function Header() {
         }
     }
 
+    async function handleLogout() {
+        try {
+            await logout();
+        } catch (error) {
+            console.error("Failed to log out", error);
+        }
+    }
+
     return (
         <div id="Header" data-testid="Header">
             <div className="Col">
                 <span id="AppLogo">{APP_NAME}</span>
                 <span className="versionInfo">{APP_TITLE}</span>
+                {currentUser && <span style={{fontSize: '12px', marginLeft: '10px', color: '#888'}}>Hi, {currentUser.displayName || currentUser.email}</span>}
             </div>
 
             <div className="Col"></div>
@@ -89,7 +101,6 @@ export default function Header() {
                     data-testid="resetDashboard"
                 >
                     <RefreshCcw size={14} style={{ marginRight: 8 }} /> Reset
-                    Dashboard
                 </button>
                 <button
                     className="danger"
@@ -97,7 +108,12 @@ export default function Header() {
                     data-testid="clearDashboard"
                 >
                     <Trash2 size={14} style={{ marginRight: 8 }} /> Clear
-                    Dashboard
+                </button>
+                <button
+                    onClick={handleLogout}
+                    title="Log Out"
+                >
+                    <LogOut size={14} style={{ marginRight: 8 }} /> Logout
                 </button>
                 <button
                     data-testid="sourceCodeButton"

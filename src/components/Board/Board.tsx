@@ -15,6 +15,10 @@ export type Widget = {
     title?: string;
     content?: string;
     bookmarks?: Bookmark[];
+    videoId?: string;
+    channelIds?: string[];
+    videoCount?: number;
+    orientation?: 'vertical' | 'horizontal' | 'grid';
 };
 export type WidgetInfo = Widget & Layout;
 

@@ -1,4 +1,4 @@
-export const APP_NAME = "in.vester.app";
+export const APP_NAME = "kanso";
 export const APP_VERSION = "1.0.0";
 export const APP_TITLE = `version ${APP_VERSION} March 3rd, 2023`;
 export const AVAILABLE_WIDGETS = [
@@ -52,6 +52,11 @@ export const AVAILABLE_WIDGETS = [
     {
         name: "Coin Signals",
         type_id: "CoinSignalsWidget",
+        requirements: [],
+    },
+    {
+        name: "YouTube",
+        type_id: "YouTubeWidget",
         requirements: [],
     },
 ];

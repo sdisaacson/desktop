@@ -14,6 +14,7 @@ import PodcastsWidget from "../Widgets/Podcasts/PodcastsWidget";
 import BTCHalvingWidget from "../Widgets/BTCHalving/BTCHalvingWidget";
 import BookmarksWidget from "../Widgets/Bookmarks/BookmarksWidget";
 import CoinSignalsWidget from "../Widgets/CoinSignals/CoinSignalsWidget";
+import YouTubeWidget from "../Widgets/YouTube/YouTubeWidget";
 
 export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     const global = useSelector((state: GlobalData) => state);
@@ -97,6 +98,16 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
 
     if (widget.type === "CoinSignalsWidget") {
         return <CoinSignalsWidget id={widget.i} />;
+    }
+
+    if (widget.type === "YouTubeWidget") {
+        return (
+            <YouTubeWidget
+                theme={global.theme}
+                id={widget.i}
+                widgetData={widget}
+            />
+        );
     }
 
     if (widget.type === "BookmarksWidget") {
