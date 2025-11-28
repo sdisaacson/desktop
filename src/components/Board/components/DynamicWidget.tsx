@@ -15,13 +15,19 @@ import BTCHalvingWidget from "../Widgets/BTCHalving/BTCHalvingWidget";
 import BookmarksWidget from "../Widgets/Bookmarks/BookmarksWidget";
 import CoinSignalsWidget from "../Widgets/CoinSignals/CoinSignalsWidget";
 import YouTubeWidget from "../Widgets/YouTube/YouTubeWidget";
+import RSSWidget from "../Widgets/RSS/RSSWidget";
+import WeatherWidget from "../Widgets/Weather/WeatherWidget";
+import CalendarWidget from "../Widgets/Calendar/CalendarWidget";
+import MeetingScheduleWidget from "../Widgets/MeetingSchedule/MeetingScheduleWidget";
+import EmailWidget from "../Widgets/Email/EmailWidget";
+import FileManagerWidget from "../Widgets/FileManager/FileManagerWidget";
 
 export default function DynamicWidget({ widget }: DynamicWidgetProps) {
-    const global = useSelector((state: GlobalData) => state);
+    const theme = useSelector((state: GlobalData) => state.theme);
     if (widget.type === "ChartBoxWidget" && widget.symbol) {
         return (
             <ChartBoxWidget
-                theme={global.theme}
+                theme={theme}
                 id={widget.i}
                 symbol={widget.symbol}
             />
@@ -29,13 +35,13 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     }
 
     if (widget.type === "EconomicCalendarWidget") {
-        return <EconomicCalendarWidget theme={global.theme} id={widget.i} />;
+        return <EconomicCalendarWidget theme={theme} id={widget.i} />;
     }
 
     if (widget.type === "TickerWidget") {
         return (
             <TickerWidget
-                theme={global.theme}
+                theme={theme}
                 id={widget.i}
                 symbol={widget.symbol as string}
             />
@@ -45,7 +51,7 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     if (widget.type === "MiniChartWidget" && widget.symbol) {
         return (
             <MiniChartWidget
-                theme={global.theme}
+                theme={theme}
                 id={widget.i}
                 symbol={widget.symbol}
             />
@@ -55,7 +61,7 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     if (widget.type === "TechnicalAnalysisWidget" && widget.symbol) {
         return (
             <TechnicalAnalysisWidget
-                theme={global.theme}
+                theme={theme}
                 id={widget.i}
                 symbol={widget.symbol}
             />
@@ -65,7 +71,70 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     if (widget.type === "NewsWidget") {
         return (
             <NewsWidget
-                theme={global.theme}
+                theme={theme}
+                id={widget.i}
+                widgetData={widget}
+            />
+        );
+    }
+    if (widget.type === "RSSWidget") {
+        return (
+            <RSSWidget
+                theme={theme}
+                id={widget.i}
+                widgetData={widget}
+            />
+        );
+    }
+
+    if (widget.type === "WeatherWidget") {
+        return (
+            <WeatherWidget
+                theme={theme}
+                id={widget.i}
+                widgetData={widget}
+            />
+        );
+    }
+
+    if (widget.type === "CalendarWidget") {
+        return <CalendarWidget id={widget.i} />;
+    }
+
+    if (widget.type === "MeetingScheduleWidget") {
+        return (
+            <MeetingScheduleWidget
+                theme={theme}
+                id={widget.i}
+                widgetData={widget}
+            />
+        );
+    }
+
+    if (widget.type === "YouTubeWidget") {
+        return (
+            <YouTubeWidget
+                theme={theme}
+                id={widget.i}
+                widgetData={widget}
+            />
+        );
+    }
+
+    if (widget.type === "EmailWidget") {
+        return (
+            <EmailWidget
+                theme={theme}
+                id={widget.i}
+                widgetData={widget}
+            />
+        );
+    }
+    
+    if (widget.type === "FileManagerWidget") {
+        return (
+            <FileManagerWidget
+                theme={theme}
                 id={widget.i}
                 widgetData={widget}
             />
@@ -77,7 +146,7 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
     }
 
     if (widget.type === "TickerTapeWidget") {
-        return <TickerTapeWidget theme={global.theme} id={widget.i} />;
+        return <TickerTapeWidget theme={theme} id={widget.i} />;
     }
 
     if (widget.type === "FearGreedWidget") {
@@ -100,16 +169,6 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
         return <CoinSignalsWidget id={widget.i} />;
     }
 
-    if (widget.type === "YouTubeWidget") {
-        return (
-            <YouTubeWidget
-                theme={global.theme}
-                id={widget.i}
-                widgetData={widget}
-            />
-        );
-    }
-
     if (widget.type === "BookmarksWidget") {
         return (
             <BookmarksWidget bookmarks={widget.bookmarks || []} id={widget.i} />
@@ -118,7 +177,7 @@ export default function DynamicWidget({ widget }: DynamicWidgetProps) {
 
     return (
         <TickerWidget
-            theme={global.theme}
+            theme={theme}
             id={widget.i}
             symbol={widget.symbol as string}
         />

@@ -8,7 +8,7 @@ import { INITIAL_LAYOUT, INITIAL_WIDGETS } from "../constants/initials";
 
 export const useFirestore = () => {
     const dispatch = useDispatch();
-    const global = useSelector((state: GlobalData) => state);
+    // Removed unused global selector
     const [loading, setLoading] = useState(false);
 
     // Helper to get the current user ID
@@ -50,14 +50,15 @@ export const useFirestore = () => {
                 // Recalculate board from widgets+layouts if needed, or if saved directly
                 // (Logic similar to useBoard's generateLayoutArray would be needed here or triggered)
             } else {
-                // Initialize new user with defaults
+                // Initialize new user with defaults (Blank Dashboard)
                 await setDoc(userDocRef, {
-                    widgets: INITIAL_WIDGETS,
-                    layouts: INITIAL_LAYOUT,
+                    widgets: [],
+                    layouts: [],
                     dashboards: []
                 });
-                dispatch(setWidgets(INITIAL_WIDGETS));
-                dispatch(setLayouts(INITIAL_LAYOUT));
+                dispatch(setWidgets([]));
+                dispatch(setLayouts([]));
+                dispatch(setBoard([]));
             }
         } catch (error) {
             console.error("Error loading from Firestore:", error);

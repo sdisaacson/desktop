@@ -6,6 +6,7 @@ import "react-resizable/css/styles.css";
 import DynamicWidget from "./components/DynamicWidget";
 import { useSelector } from "react-redux";
 import { useBoard } from "../../hooks/useBoard";
+import { useFirestore } from "../../hooks/useFirestore";
 import { GlobalData } from "../../store/global";
 
 export type Widget = {
@@ -23,19 +24,25 @@ export type Widget = {
 export type WidgetInfo = Widget & Layout;
 
 export default function Board() {
-    const { save, getBoard } = useBoard();
-    const global = useSelector((state: GlobalData) => state);
+    const { save } = useBoard();
+    const { loadFromFirestore } = useFirestore();
+    
+    // Select specific fields to avoid root state selector warning
+    const board = useSelector((state: GlobalData) => state.board);
+    const activeDashboard = useSelector((state: GlobalData) => state.activeDashboard);
+    const widgets = useSelector((state: GlobalData) => state.widgets);
+    const dashboards = useSelector((state: GlobalData) => state.dashboards);
 
     useEffect(() => {
-        getBoard();
+        loadFromFirestore();
         // eslint-disable-next-line
     }, []);
 
-    if (!global.board) return null;
+    if (!board) return null;
 
     return (
         <div id="Board" data-testid="Board">
-            {global.board.length > 0 && (
+            {board.length > 0 && (
                 <GridLayout
                     resizeHandles={["s", "se", "e"]}
                     autoSize={true}
@@ -46,36 +53,36 @@ export default function Board() {
                     verticalCompact={true}
                     className="layout"
                     containerPadding={[10, 10]}
-                    layout={global.board}
+                    layout={board}
                     cols={24}
                     rowHeight={35}
                     width={window.innerWidth - 40}
                     onDragStop={async (layout) => {
-                        if (global.activeDashboard === "home") {
-                            save({ layout, widgets: global.widgets });
+                        if (activeDashboard === "home") {
+                            save({ layout, widgets: widgets });
                         } else {
                             const thisDashboard: Dashboard =
-                                global.dashboards.find(
+                                dashboards.find(
                                     (dashB) =>
-                                        dashB.id === global.activeDashboard
+                                        dashB.id === activeDashboard
                                 ) as Dashboard;
                             save({ layout, widgets: thisDashboard.widgets });
                         }
                     }}
                     onResizeStop={async (layout) => {
-                        if (global.activeDashboard === "home") {
-                            save({ layout, widgets: global.widgets });
+                        if (activeDashboard === "home") {
+                            save({ layout, widgets: widgets });
                         } else {
                             const thisDashboard: Dashboard =
-                                global.dashboards.find(
+                                dashboards.find(
                                     (dashB) =>
-                                        dashB.id === global.activeDashboard
+                                        dashB.id === activeDashboard
                                 ) as Dashboard;
                             save({ layout, widgets: thisDashboard.widgets });
                         }
                     }}
                 >
-                    {global.board.map((widget: WidgetInfo) => {
+                    {board.map((widget: WidgetInfo) => {
                         return (
                             <div key={widget.i} data-testid="Widget">
                                 <DynamicWidget widget={widget} />

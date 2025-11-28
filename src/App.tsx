@@ -7,24 +7,24 @@ import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import LoginScreen from "./components/Auth/LoginScreen";
 
 function AppContent() {
-    const global = useSelector((state: GlobalData) => state);
+    const theme = useSelector((state: GlobalData) => state.theme);
     const { currentUser } = useAuth();
     const dispatch = useDispatch();
 
     useEffect(() => {
         let selectedTheme = localStorage.getItem("theme");
-        if (selectedTheme && selectedTheme !== global.theme) {
+        if (selectedTheme && selectedTheme !== theme) {
             dispatch(toggleTheme(selectedTheme));
         }
         // eslint-disable-next-line
     }, []);
 
     if (!currentUser) {
-        return <LoginScreen theme={global.theme} />;
+        return <LoginScreen theme={theme} />;
     }
 
     return (
-        <div id="App" className={global.theme} data-theme={global.theme}>
+        <div id="App" className={theme} data-theme={theme}>
             <Layout />
         </div>
     );

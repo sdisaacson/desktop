@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export const useDashboard = () => {
     const dispatch = useDispatch();
-    const { dashboards } = useSelector((state: GlobalData) => state);
+    const dashboards = useSelector((state: GlobalData) => state.dashboards);
 
     const saveDashboards = (dashboardsArr: Dashboard[]) => {
         try {

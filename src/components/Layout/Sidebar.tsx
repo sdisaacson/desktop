@@ -12,9 +12,8 @@ import { useBoard } from "../../hooks/useBoard";
 export default function Sidebar() {
     const dispatch = useDispatch();
     const [activeOne, setActiveOne] = useState<string>("home");
-    const { activeDashboard, dashboards } = useSelector(
-        (state: GlobalData) => state
-    );
+    const activeDashboard = useSelector((state: GlobalData) => state.activeDashboard);
+    const dashboards = useSelector((state: GlobalData) => state.dashboards);
     const {
         createNewDashboard,
         getLocalDashboards,

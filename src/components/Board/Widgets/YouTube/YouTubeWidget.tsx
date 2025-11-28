@@ -27,7 +27,12 @@ interface VideoItem {
 export default function YouTubeWidget({ id, theme, widgetData }: YouTubeWidgetProps) {
     const { save } = useBoard();
     const { saveToFirestore } = useFirestore(); // Hook for Firebase persistence
-    const { widgets, layouts, dashboards, activeDashboard } = useSelector((state: GlobalData) => state);
+    
+    // Select specific fields
+    const widgets = useSelector((state: GlobalData) => state.widgets);
+    const layouts = useSelector((state: GlobalData) => state.layouts);
+    const dashboards = useSelector((state: GlobalData) => state.dashboards);
+    const activeDashboard = useSelector((state: GlobalData) => state.activeDashboard);
 
     const defaultChannelId = "UC0C-17n9iuUQPylguM1d-lQ"; // Google Developers Channel
 
@@ -170,7 +175,6 @@ export default function YouTubeWidget({ id, theme, widgetData }: YouTubeWidgetPr
             <div className="youtube-content">
                 {isConfiguring ? (
                     <div className="youtube-setup">
-                        <h4>Configuration</h4>
                         
                         <label>Channel IDs:</label>
                         <div className="channel-list">
@@ -190,14 +194,14 @@ export default function YouTubeWidget({ id, theme, widgetData }: YouTubeWidgetPr
                                     )}
                                 </div>
                             ))}
-                            <button className="youtube-btn" onClick={addChannelInput}>
+                            <button className="youtube-save-btn youtube-add-channel-btn" onClick={addChannelInput}>
                                 <Plus size={12}/> Add Channel
                             </button>
                         </div>
 
                         <label>Number of Videos (per channel):</label>
                         <input 
-                            type="number" 
+                            type="text" /* Changed from type="number" */
                             className="youtube-input"
                             value={videoCountInput}
                             min={1}

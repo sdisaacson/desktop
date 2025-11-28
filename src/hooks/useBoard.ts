@@ -15,9 +15,8 @@ import { useDashboard } from "./useDashboard";
 export const useBoard = (): UseBoardMethods => {
     const dispatch = useDispatch();
     const { getLocalDashboards } = useDashboard();
-    const { activeDashboard, dashboards } = useSelector(
-        (state: GlobalData) => state
-    );
+    const activeDashboard = useSelector((state: GlobalData) => state.activeDashboard);
+    const dashboards = useSelector((state: GlobalData) => state.dashboards);
 
     const getBoard = () => {
         const layout_changed = localStorage.getItem("layout_changed");

@@ -27,7 +27,7 @@ import { useAuth } from "../../contexts/AuthContext";
 export default function Header() {
     const [fullScreen, setFullScreen] = useState(false);
     const dispatch = useDispatch();
-    const global = useSelector((state: RootState) => state);
+    const modalOpen = useSelector((state: RootState) => state.modalOpen);
     const { logout, currentUser } = useAuth();
 
     function toggleFullscreen() {
@@ -42,7 +42,7 @@ export default function Header() {
     }
 
     function handleModal() {
-        dispatch(toggleModalOpen(!global.modalOpen));
+        dispatch(toggleModalOpen(!modalOpen));
     }
 
     function handleClearDashboard() {
@@ -144,16 +144,16 @@ export default function Header() {
 
 function ThemeSwitcherWithAnimation() {
     const [themeClass, setThemeClass] = useState("night");
-    const global = useSelector((state: GlobalData) => state);
+    const theme = useSelector((state: GlobalData) => state.theme);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (global.theme === "dark") {
+        if (theme === "dark") {
             setThemeClass("day");
         } else {
             setThemeClass("night");
         }
-    }, [global.theme]);
+    }, [theme]);
 
     return (
         <div
@@ -161,7 +161,7 @@ function ThemeSwitcherWithAnimation() {
             onClick={() => {
                 setThemeClass((before) => (before === "day" ? "night" : "day"));
                 dispatch(
-                    toggleTheme(global.theme === "dark" ? "light" : "dark")
+                    toggleTheme(theme === "dark" ? "light" : "dark")
                 );
             }}
         >
