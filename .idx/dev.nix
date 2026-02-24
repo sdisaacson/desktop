@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   # To learn more about how to use Nix to configure your environment
   # see: https://firebase.google.com/docs/studio/customize-workspace
-  
+
   # Which nixpkgs channel to use.
   channel = "stable-24.05"; # or "unstable"
 
@@ -10,6 +10,7 @@
     pkgs.nodejs_22
     pkgs.yarn
     pkgs.nodePackages.npm
+    pkgs.docker
   ];
 
   # Sets environment variables in the workspace
@@ -32,16 +33,6 @@
           };
         };
       };
-    };
-
-    # Workspace lifecycle hooks
-    workspace = {
-      # Runs when a workspace is first created
-      onCreate = {
-        npm-install = "npm install";
-      };
-      # Runs when the workspace is (re)started
-      onStart = {};
     };
   };
 }

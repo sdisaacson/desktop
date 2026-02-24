@@ -63,8 +63,6 @@
     "@types/uuid": "^11.0.0",
     "babel-plugin-named-exports-order": "^0.0.2",
     "cypress": "^15.10.0",
-    "eslint": "^8.57.1",
-    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-storybook": "^10.2.11",
     "globals": "^17.3.0",
     "prop-types": "^15.8.1",

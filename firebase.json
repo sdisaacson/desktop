@@ -10,7 +10,6 @@
   "functions": [
     {
       "codebase": "default",
-      "source": "functions",
       "ignore": [
         "node_modules",
         ".git",
@@ -18,10 +17,7 @@
         "firebase-debug.*.log",
         "*.local"
       ],
-      "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint",
-        "npm --prefix \"$RESOURCE_DIR\" run build"
-      ]
+      "source": "functions"
     }
   ],
   "firestore": {
@@ -31,7 +27,7 @@
     "indexes": "firestore.indexes.json"
   },
   "storage": {
-    "rules": "storage.rules"
+    "rules": "y"
   },
   "emulators": {
     "auth": {
@@ -49,5 +45,13 @@
     "ui": {
       "port": 4000
     }
+  },
+  "apphosting": {
+    "backendId": "sisaacson-kanso",
+    "rootDir": "/",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ]
   }
 }
