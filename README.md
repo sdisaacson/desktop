@@ -1,4 +1,3 @@
-# invester
 Create an investment observing screen the way you desire.
 
 ## Demo

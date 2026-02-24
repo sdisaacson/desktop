@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "staging": "kanso-new",
+    "default": "kanso-new"
+  },
+  "targets": {},
+  "etags": {}
+}
