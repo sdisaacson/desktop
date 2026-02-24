@@ -6,12 +6,12 @@ import { getStorage, connectStorageEmulator } from "firebase/storage";
 // Your web app's Firebase configuration
 // For localhost/emulators, these values don't strictly matter but must be present.
 const firebaseConfig = {
-  apiKey: "demo-api-key",
-  authDomain: "demo-project.firebaseapp.com",
-  projectId: "demo-local",
-  storageBucket: "demo-project.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123456"
+  apiKey: "AIzaSyDs3LpdleVp3R4wOA9p_wPrXTIzeaOQUJ4",
+  authDomain: "kanso-new.firebaseapp.com",
+  projectId: "kanso-new",
+  storageBucket: "kanso-new.firebasestorage.app",
+  messagingSenderId: "414698597464",
+  appId: "1:414698597464:web:760f88f3b8af50a46e2e2d"
 };
 
 // Initialize Firebase
